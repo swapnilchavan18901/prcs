@@ -1,0 +1,28 @@
+struct item {
+	int value, weight;
+	double ratio;
+};
+double fractional(int n,struct item arr[],int w){
+    int current=0;
+    double fval=0.0;
+    int i;
+    for(i=0;i<n;i++){
+        if(current+arr[i].weight<=w){
+            current+=arr[i].weight;
+            fval+=arr[i].value;
+        }
+        else{
+            double rem=w-current;
+            fval+=arr[i].value*(rem/arr[i].weight);
+        }
+    }
+    
+    
+    return fval;
+}
+int main() {
+
+    struct item arr[3] = { { 3, 2,1.5},{ 7, 5,1.4 },{ 7,66,0.1 } };
+printf("%f",fractional(3,arr,40));
+    return 0;
+}

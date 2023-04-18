@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int bin(int s,int e,int x,int arr[]){
+    if(s>=e){
+        return -1;
+    }
+    int mid=s+(e-s)/2;
+    if(arr[mid]==x){
+       return 1;
+    }
+    else if(arr[mid]>x){
+        
+        bin(s,mid-1,x,arr);
+    }
+    else if(arr[mid]<x){
+        bin(mid+1,e,x,arr);
+    }
+}
+int main() {
+  
+  int arr[5]={4,7,9,11,19};
+    printf("%d",bin(0,4,4,arr));
+    return 0;
+}

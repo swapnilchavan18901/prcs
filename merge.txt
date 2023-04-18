@@ -1,0 +1,67 @@
+
+void merge(int s, int e, int arr[]) {
+	int mid = (s + e) / 2;
+	int len1 = mid - s + 1;
+	int len2 = e - mid ;
+
+	int first[len1];
+	int second[len2];
+	int mainindex = s;
+	int index1 = 0;
+	int index2 = 0;
+
+
+	for (int i = 0; i < len1; ++i)
+	{
+		first[i] = arr[mainindex++];
+	}
+	mainindex = mid + 1;
+	for (int i = 0; i < len2; ++i)
+	{
+		second[i] = arr[mainindex++];
+	}
+
+	mainindex = s;
+	while (index1 < len1 && index2 < len2) {
+		if (first[index1] > second[index2]) {
+			arr[mainindex++] = second[index2++];
+
+		}
+		else {
+			arr[mainindex++] = first[index1++];
+		}
+
+	}
+	while (index1 < len1) {
+		arr[mainindex++] = first[index1++];
+	}
+	while (index2 < len2) {
+		arr[mainindex++] = second[index2++];
+	}
+
+}
+
+void mergesort(int s, int e, int arr[]) {
+	if (s < e) {
+		int mid = s + ( e - s) / 2;
+		//left side
+		mergesort(s, mid, arr);
+		//rightside
+		mergesort(mid + 1, e, arr);
+		merge(s, e, arr);
+	}
+	return;
+
+}
+int main() {
+	int n;
+
+	int arr[5] = {1, 3, 2, 2, 1};
+
+	mergesort(0, 4, arr);
+	for (int i = 0; i < 5; ++i)
+	{
+		printf("%d ", arr[i]) ;
+	}
+	return 0;
+}
